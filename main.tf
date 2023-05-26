@@ -7,12 +7,9 @@ provider "aws" {
   region = var.region
 }
 
-data "aws_availability_zones" "available" {}
-
 data "aws_caller_identity" "current" {}
 
 locals {
-  azs         = slice(data.aws_availability_zones.available.names, 0, 2)
   bucket_name = format("%s-%s", "aws-ia-mwaa", data.aws_caller_identity.current.account_id)
 }
 
@@ -126,8 +123,8 @@ module "mwaa" {
 
   min_workers        = 1
   max_workers        = 2
-  vpc_id             = module.vpc.vpc_id
-  private_subnet_ids = module.vpc.private_subnets
+  vpc_id             = var.vpc_id
+  private_subnet_ids = var.subnet_ids
 
   webserver_access_mode = "PUBLIC_ONLY"   # Choose the Private network option(PRIVATE_ONLY) if your Apache Airflow UI is only accessed within a corporate network, and you do not require access to public repositories for web server requirements installation
   source_cidr           = ["10.1.0.0/16"] # Add your IP address to access Airflow UI
@@ -136,23 +133,3 @@ module "mwaa" {
 
 }
 
-#---------------------------------------------------------------
-# Supporting Resources
-#---------------------------------------------------------------
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
-
-  name = var.name
-  cidr = var.vpc_cidr
-
-  azs             = local.azs
-  public_subnets  = [for k, v in local.azs : cidrsubnet(var.vpc_cidr, 8, k)]
-  private_subnets = [for k, v in local.azs : cidrsubnet(var.vpc_cidr, 8, k + 10)]
-
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
-  enable_dns_hostnames = true
-
-  tags = var.tags
-}
