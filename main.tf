@@ -10,7 +10,7 @@ provider "aws" {
 data "aws_caller_identity" "current" {}
 
 locals {
-  bucket_name = format("%s-%s", "aws-ia-mwaa", data.aws_caller_identity.current.account_id)
+  bucket_name = format("%s-%s", "sdp-dev-mwaa", data.aws_caller_identity.current.account_id)
 }
 
 #-----------------------------------------------------------
