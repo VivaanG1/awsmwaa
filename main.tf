@@ -127,7 +127,7 @@ module "mwaa" {
   private_subnet_ids = var.subnet_ids
 
   webserver_access_mode = "PUBLIC_ONLY"   # Choose the Private network option(PRIVATE_ONLY) if your Apache Airflow UI is only accessed within a corporate network, and you do not require access to public repositories for web server requirements installation
-  source_cidr           = ["10.1.0.0/16"] # Add your IP address to access Airflow UI
+  source_cidr           = ["0.0.0.0/0"] # Add your IP address to access Airflow UI
 
   tags = var.tags
 
