@@ -25,5 +25,5 @@ variable "vpc_id" {
 variable "subnet_ids" {
   description = "Subnet CIDRs for MWAA"
   type        = list(string)
-  default     = 
+  default     = []
 }
