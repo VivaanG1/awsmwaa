@@ -16,10 +16,10 @@ variable "tags" {
   type        = map(string)
 }
 
-variable "vpc_cidr" {
-  description = "VPC CIDR for MWAA"
+variable "vpc_id" {
+  description = "VPC id for MWAA"
   type        = string
-  default     = "10.1.0.0/16"
+  default     = null
 }
 
 variable "subnet_ids" {
