@@ -20,9 +20,7 @@ jobs:
         aws-region: us-east-1
 
     - name: Terraform Initialize
-      run: | 
-        terraform init
+      run:	terraform init
 	  
-	- name: Terraform Plan
-	  run:	|
-    terraform plan
+    - name: Terraform Plan
+      run:	terraform plan
