@@ -25,7 +25,7 @@ jobs:
     # with:
     #    cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 		
-	#  AWS Credentials Setup	
+    #  AWS Credentials Setup	
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
