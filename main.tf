@@ -74,7 +74,7 @@ resource "aws_s3_object" "reqs" {
 # NOTE: MWAA Airflow environment takes minimum of 20 mins
 #-----------------------------------------------------------
 module "mwaa" {
-  source = "../.."
+  source = "./modules"
 
   name              = var.name
   airflow_version   = "2.5.1"
