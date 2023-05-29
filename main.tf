@@ -77,8 +77,8 @@ module "mwaa" {
   source = "../.."
 
   name              = var.name
-  airflow_version   = "2.2.2"
-  environment_class = "mw1.medium"
+  airflow_version   = "2.5.1"
+  environment_class = "mw1.small"
   create_s3_bucket  = false
   source_bucket_arn = aws_s3_bucket.this.arn
   dag_s3_path       = "dags"
